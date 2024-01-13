@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+// O(n2)
 void insertionSort(std::vector<int> &vector)
 {
     for (int step = 0; step < vector.size(); step++)
@@ -30,7 +31,7 @@ void print(const std::vector<int> &vector)
 
 int main()
 {
-    std::vector numbers = {5, 48, 1, 123, 45, 23, 1};
+    std::vector numbers = {5, 48, 1, 123, 45, 23, 1, -1};
     print(numbers);
     insertionSort(numbers);
     print(numbers);
