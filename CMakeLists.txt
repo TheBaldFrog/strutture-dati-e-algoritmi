@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.6.0)
-project(dsa VERSION 0.1.0 LANGUAGES C CXX)
+project(dsa)
 
-add_executable(${PROJECT_NAME})
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED On)
 
-target_sources(${PROJECT_NAME} PRIVATE
-    ./insertion_sort.cpp
-)
-
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+add_executable(insertion_sort insertion_sort.cpp)
+add_executable(selection_sort selection_sort.cpp)
