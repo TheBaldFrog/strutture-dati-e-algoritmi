@@ -1,8 +1,4 @@
 cmake_minimum_required(VERSION 3.6.0)
-project(dsa)
+project(data_structures_and_algorithms VERSION 0.1.0)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED On)
-
-add_executable(insertion_sort insertion_sort.cpp)
-add_executable(selection_sort selection_sort.cpp)
+add_subdirectory(sorting_algorithms)
