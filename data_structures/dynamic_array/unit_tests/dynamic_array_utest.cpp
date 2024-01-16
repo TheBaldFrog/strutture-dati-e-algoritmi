@@ -16,6 +16,7 @@ TEST_CASE("Dynamic array has correct size and initialized to 0 when using size c
     REQUIRE(!arr.empty());
     REQUIRE(arr.capacity() >= 23);
     REQUIRE(arr.size() == 23);
+    REQUIRE(arr.data());
 
     for (size_t i = 0; i < arr.size(); i++)
     {
