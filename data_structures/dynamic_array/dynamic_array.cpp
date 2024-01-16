@@ -7,6 +7,8 @@ DynamicArray::DynamicArray(size_t initialSize)
     m_currentCapacity = initialSize;
 }
 
+DynamicArray::~DynamicArray() { delete[] m_arr; }
+
 size_t DynamicArray::size() const { return m_currentSize; }
 
 size_t DynamicArray::capacity() const { return m_currentCapacity; }

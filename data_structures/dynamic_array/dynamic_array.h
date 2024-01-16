@@ -10,6 +10,7 @@ public:
     DynamicArray(size_t initialSize);
     DynamicArray(const DynamicArray &);
     DynamicArray &operator=(const DynamicArray &);
+    ~DynamicArray();
 
     void push_back(double value);
     void pop_back();
