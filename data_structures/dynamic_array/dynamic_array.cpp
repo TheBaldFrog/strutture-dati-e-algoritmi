@@ -30,14 +30,14 @@ DynamicArray &DynamicArray::operator=(const DynamicArray &other)
 {
     if (this != &other)
     {
-        double *new_arr = new double[other.m_currentCapacity];
+        double *newArr = new double[other.m_currentCapacity];
         for (size_t i = 0; i < other.m_currentSize; i++)
         {
-            new_arr[i] = other.m_arr[i];
+            newArr[i] = other.m_arr[i];
         }
 
         delete[] m_arr;
-        m_arr = new_arr;
+        m_arr = newArr;
         m_currentSize = other.m_currentSize;
         m_currentCapacity = other.m_currentCapacity;
     }
@@ -106,20 +106,20 @@ void DynamicArray::push_back(double value)
     static const int RESIZE_CONSTANT = 2;
 
     const size_t newCapacity = m_currentCapacity * RESIZE_CONSTANT;
-    double *new_arr = new double[newCapacity];
+    double *newArr = new double[newCapacity];
 
     // copy
     int i = 0;
     for (; i < m_currentSize; i++)
     {
-        new_arr[i] = m_arr[i];
+        newArr[i] = m_arr[i];
     }
 
-    new_arr[i] = value;
+    newArr[i] = value;
     ++m_currentSize;
 
     delete[] m_arr;
-    m_arr = new_arr;
+    m_arr = newArr;
     m_currentCapacity = newCapacity;
 }
 
