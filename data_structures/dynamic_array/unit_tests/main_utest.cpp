@@ -1,7 +1,7 @@
-#include <iostream>
+#define CATCH_CONFIG_MAIN
 
-int main()
-{
-    std::cout << "TEST TEST TEST";
-    return 0;
-}
+#include "catch.hpp"
+
+// TEST_CASE("1: All test casses reside in other .cpp files(empty),
+// [multi-file:1]") {
+// }

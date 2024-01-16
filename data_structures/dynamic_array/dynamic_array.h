@@ -6,7 +6,7 @@
 class DynamicArray
 {
 public:
-    DynamicArray();
+    DynamicArray() = default;
     DynamicArray(size_t initialSize);
     DynamicArray(const DynamicArray &);
     DynamicArray &operator=(const DynamicArray &);
@@ -15,7 +15,7 @@ public:
     void pop_back();
 
     /**
-     * Checks if index is out pf bounds and throws exeption if it is
+     * Checks if index is out pf bounds and throws exception if it is
      * @throw std::out_of_range
      * ! make method const
      */
@@ -32,7 +32,7 @@ public:
     size_t size() const;
 
     /**
-     * Returns the size of the internal buffeer
+     * Returns the size of the internal buffer
      */
     size_t capacity() const;
 
@@ -52,7 +52,7 @@ public:
     double *data() noexcept;
 
 private:
-    double *m_arr;
-    size_t m_currentSize;
-    size_t m_currentCapacity;
+    double *m_arr = nullptr;
+    size_t m_currentSize = 0;
+    size_t m_currentCapacity = 0;
 };

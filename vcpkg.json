@@ -1,7 +1,7 @@
 {
     "dependencies": [
         {
-            "name": "fmt"
+            "name": "catch2"
         }
     ]
 }
