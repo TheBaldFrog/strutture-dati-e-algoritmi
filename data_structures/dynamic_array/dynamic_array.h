@@ -20,12 +20,13 @@ public:
      * @throw std::out_of_range
      * ! make method const
      */
-    double &at(size_t index);
+    double &at(size_t index) const;
 
     /**
      * Access element without checking if index is out of bounds
      */
     double &operator[](size_t index);
+    const double &operator[](size_t index) const;
 
     /**
      * Returns number of elements in the array
@@ -44,7 +45,7 @@ public:
      * after calling it, size() will return 0, nut capacity() will remain
      * the same before calling it
      */
-    void clear() const;
+    void clear();
 
     /**
      * Returns a direct pointer to the memory array used internally
@@ -57,3 +58,6 @@ private:
     size_t m_currentSize = 0;
     size_t m_currentCapacity = 0;
 };
+
+bool operator==(const DynamicArray &lhs, const DynamicArray &rhs);
+bool operator!=(const DynamicArray &lhs, const DynamicArray &rhs);
