@@ -12,7 +12,17 @@ public:
     DynamicArray &operator=(const DynamicArray &);
     ~DynamicArray();
 
+    /**
+     * Appends the given element value to the end of
+     * the container
+     */
     void push_back(double value);
+
+    /**
+     * Removes the last element of the container.
+     * Calling pop_back on an empty container throws exception.
+     * @throw std::runtime_error
+     */
     void pop_back();
 
     /**
