@@ -38,6 +38,9 @@ public:
     T &operator[](size_t index);
     const T &operator[](size_t index) const;
 
+    T &back();
+    const T &back() const;
+
     /**
      * Returns number of elements in the array
      */
@@ -195,6 +198,18 @@ template <typename T>
 const T &DynamicArray<T>::operator[](size_t index) const
 {
     return m_arr[index];
+}
+
+template <typename T>
+inline T &DynamicArray<T>::back()
+{
+    return m_arr[size() - 1];
+}
+
+template <typename T>
+inline const T &DynamicArray<T>::back() const
+{
+    return m_arr[size() - 1];
 }
 
 template <typename T>
