@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6.0)
-project(dynamic_array_data_structure_unit_tests)
+project(dynamic_array_data_structure_non_template_unit_tests)
 
 find_package(Catch2 CONFIG REQUIRED)
 

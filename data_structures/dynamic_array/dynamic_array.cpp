@@ -3,9 +3,9 @@
 
 DynamicArray::DynamicArray(size_t initialSize)
 {
-    // initialize array with 0
     m_arr = new double[initialSize];
 
+    // initialize array with 0
     for (size_t i = 0; i < initialSize; i++)
     {
         m_arr[i] = 0;
