@@ -1,4 +1,5 @@
 #include "dynamic_array.h"
+#include <stdexcept>
 
 DynamicArray::DynamicArray(size_t initialSize)
 {

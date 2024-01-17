@@ -1,4 +1,5 @@
 #include "dynamic_array.h"
+#include <iostream>
 
 void print(const DynamicArray &arr)
 {
