@@ -8,6 +8,6 @@
 - [Stack](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/tree/58c7e44f482dcb660f4737900d11f036c7332274/data_structures/stack)
 
 ### Algoritmi
-- [Sorting algorithms](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/tree/58c7e44f482dcb660f4737900d11f036c7332274/sorting_algorithms)
+- [Sorting and searching algorithms](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/tree/58c7e44f482dcb660f4737900d11f036c7332274/sorting_algorithms)
 
 ### Other
