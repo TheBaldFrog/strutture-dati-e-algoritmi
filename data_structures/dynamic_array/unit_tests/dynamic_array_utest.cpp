@@ -199,7 +199,7 @@ TEST_CASE("Pop back works correctly")
 TEST_CASE("shrink_to_fit works correctly")
 {
     DynamicArray arr{200};
-    
+
     for (size_t i = 0; i < 150; i++)
     {
         arr.pop_back();
@@ -232,4 +232,32 @@ TEST_CASE("shrink_to_fit works correctly")
     REQUIRE(arr.capacity() == 8);
     REQUIRE(arr.size() == 5);
     REQUIRE(arr.data());
+}
+
+TEST_CASE("insert works correctly")
+{
+    DynamicArray arr;
+
+    for (size_t i = 0; i < 1000; i++)
+    {
+        arr.insert(i, static_cast<double>(i));
+        REQUIRE(arr[i] == i);
+    }
+
+    REQUIRE(arr.size() == 1000);
+    REQUIRE(arr.capacity() > 1000);
+
+    for (size_t i = 500; i < 1000; i++)
+    {
+        arr.insert(i, static_cast<double>(9));
+        REQUIRE(arr[i] == 9);
+    }
+
+    REQUIRE(arr.size() == 1500);
+    REQUIRE(arr.capacity() > 1500);
+
+    REQUIRE_THROWS_AS(arr.insert(-1, 4), std::out_of_range);
+    REQUIRE_THROWS_AS(arr.insert(1501, 4), std::out_of_range);
+    REQUIRE_NOTHROW(arr.insert(1500, 1));
+    REQUIRE(arr[1500] == 1);
 }

@@ -104,7 +104,7 @@ void DynamicArray::push_back(double value)
         return;
     }
 
-    static const int RESIZE_CONSTANT = 2;
+    // static const int RESIZE_CONSTANT = 2;
 
     const size_t newCapacity = m_currentCapacity * RESIZE_CONSTANT;
     double *newArr = new double[newCapacity];
@@ -132,6 +132,57 @@ void DynamicArray::pop_back()
     }
 
     --m_currentSize;
+}
+
+void DynamicArray::insert(size_t index, double value)
+{
+    // m_current size = 10 | 0 -> 9
+    if (index > m_currentSize)
+    {
+        throw std::out_of_range{"Index out of range."};
+    }
+
+    if (index <= m_currentSize)
+    {
+        if (m_currentSize == m_currentCapacity)
+        {
+            if (m_currentCapacity == 0)
+                m_currentCapacity++;
+            const size_t newCapacity = m_currentCapacity * RESIZE_CONSTANT;
+            double *newArr = new double[newCapacity];
+            m_currentSize++;
+
+            for (size_t i = 0; i < index; i++)
+            {
+                newArr[i] = m_arr[i];
+            }
+
+            newArr[index] = value;
+
+            for (size_t i = index + 1; i < m_currentSize; i++)
+            {
+                newArr[i] = m_arr[i - 1];
+            }
+
+            delete[] m_arr;
+            m_arr = newArr;
+            m_currentCapacity = newCapacity;
+        }
+        else
+        {
+            m_currentSize++;
+            double t = m_arr[index];
+            double t1;
+            m_arr[index] = value;
+
+            for (size_t i = index + 1; i < m_currentSize; i++)
+            {
+                t1 = m_arr[i];
+                m_arr[i] = t;
+                t = t1;
+            }
+        }
+    }
 }
 
 double &DynamicArray::at(size_t index) const

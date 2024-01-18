@@ -25,6 +25,11 @@ public:
     void pop_back();
 
     /**
+     * Insert element at the given index
+     */
+    void insert(size_t index, double value);
+
+    /**
      * Checks if index is out pf bounds and throws exception if it is
      * @throw std::out_of_range
      * ! make method const
@@ -74,6 +79,8 @@ private:
     double *m_arr = nullptr;
     size_t m_currentSize = 0;
     size_t m_currentCapacity = 0;
+
+    const int RESIZE_CONSTANT = 2;
 };
 
 bool operator==(const DynamicArray &lhs, const DynamicArray &rhs);
