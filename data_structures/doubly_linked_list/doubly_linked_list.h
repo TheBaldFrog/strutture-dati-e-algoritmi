@@ -56,6 +56,12 @@ public:
      */
     DoublyLinkedListIterator<T> erase(DoublyLinkedListIterator<T> pos);
 
+    T &front();
+    const T &front() const;
+
+    T &back();
+    const T &back() const;
+
     size_t size() const noexcept;
 
     bool empty() const noexcept;
@@ -77,6 +83,48 @@ inline DoublyLinkedList<T>::~DoublyLinkedList()
         delete head;
         head = nextHead;
     }
+}
+
+template <typename T>
+inline void DoublyLinkedList<T>::push_back(const T &value)
+{
+    Node<T> *node = new Node{value};
+    ++currentSize;
+
+    // if empty
+    if(!head)
+    {
+        head = tail = node;
+        return;
+    }
+
+    tail->next = node;
+    node->previous = tail;
+    tail = node;
+}
+
+template <typename T>
+inline T &DoublyLinkedList<T>::front()
+{
+    return head->data;
+}
+
+template <typename T>
+inline const T &DoublyLinkedList<T>::front() const
+{
+    return head->data;
+}
+
+template <typename T>
+inline T &DoublyLinkedList<T>::back()
+{
+    return tail->data;
+}
+
+template <typename T>
+inline const T &DoublyLinkedList<T>::back() const
+{
+    return tail->data();
 }
 
 template <typename T>
