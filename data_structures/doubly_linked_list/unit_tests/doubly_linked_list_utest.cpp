@@ -73,3 +73,18 @@ TEST_CASE("Push front and then pop front many elements")
 
     REQUIRE(list.empty());
 }
+
+TEST_CASE("Push a lot of elements and then clear the list")
+{
+    DoublyLinkedList<int> list;
+    for (int i = 0; i < 15'000; i++)
+    {
+        list.push_front(i + 10);
+        list.push_back(i - 10);
+    }
+
+    REQUIRE(list.size() == 30'000);
+    list.clear();
+    REQUIRE(list.size() == 0);
+    REQUIRE(list.empty());
+}

@@ -205,6 +205,15 @@ inline bool DoublyLinkedList<T>::empty() const noexcept
 }
 
 template <typename T>
+inline void DoublyLinkedList<T>::clear()
+{
+    while (!empty())
+    {
+        pop_back();
+    }
+}
+
+template <typename T>
 bool operator==(const DoublyLinkedList<T> &lhs,
                 const DoublyLinkedList<T> &rhs) {}
 
