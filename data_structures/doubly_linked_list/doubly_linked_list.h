@@ -94,7 +94,7 @@ inline void DoublyLinkedList<T>::push_back(const T &value)
     ++currentSize;
 
     // if empty
-    if(!head)
+    if (!head)
     {
         head = tail = node;
         return;
@@ -125,6 +125,46 @@ inline void DoublyLinkedList<T>::pop_back()
         tail = tail->previous;
         delete tail->next;
         tail->next = nullptr;
+    }
+}
+
+template <typename T>
+inline void DoublyLinkedList<T>::push_front(const T &value)
+{
+    Node<T> *node = new Node{value};
+    ++currentSize;
+
+    if (!head)
+    {
+        head = tail = node;
+        return;
+    }
+
+    head->previous = node;
+    node->next = head;
+    head = node;
+}
+
+template <typename T>
+inline void DoublyLinkedList<T>::pop_front()
+{
+    if (empty())
+    {
+        throw std::runtime_error{"Calling pop_front() on an empty list"};
+    }
+
+    --currentSize;
+
+    if (currentSize == 0)
+    {
+        delete head;
+        head = tail = nullptr;
+    }
+    else
+    {
+        head = head->next;
+        delete head->previous;
+        head->previous = nullptr;
     }
 }
 
