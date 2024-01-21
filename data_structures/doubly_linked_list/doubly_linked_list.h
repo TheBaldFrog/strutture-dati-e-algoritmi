@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdexcept>
+
 template <typename T>
 struct Node
 {
@@ -101,6 +103,29 @@ inline void DoublyLinkedList<T>::push_back(const T &value)
     tail->next = node;
     node->previous = tail;
     tail = node;
+}
+
+template <typename T>
+inline void DoublyLinkedList<T>::pop_back()
+{
+    if (empty())
+    {
+        throw std::runtime_error{"Calling pop_back() on an empty list."};
+    }
+
+    --currentSize;
+
+    if (currentSize == 0)
+    {
+        delete tail;
+        head = tail = nullptr;
+    }
+    else
+    {
+        tail = tail->previous;
+        delete tail->next;
+        tail->next = nullptr;
+    }
 }
 
 template <typename T>
