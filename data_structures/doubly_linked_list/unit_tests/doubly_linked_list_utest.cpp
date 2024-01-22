@@ -88,3 +88,52 @@ TEST_CASE("Push a lot of elements and then clear the list")
     REQUIRE(list.size() == 0);
     REQUIRE(list.empty());
 }
+
+TEST_CASE("Push a lot of elements test iterators")
+{
+    DoublyLinkedList<int> list;
+    for (int i = 0; i < 30'000; i++)
+    {
+        list.push_back(i);
+    }
+
+    DoublyLinkedListIterator<int> it = list.begin();
+    int i = 0;
+    for (; it != list.end(); ++it)
+    {
+        REQUIRE(*it == i++);
+    }
+
+    REQUIRE(it == list.end());
+    REQUIRE(i == 29'999);
+    REQUIRE(*it == i);
+
+    for (; it != list.begin(); --it)
+    {
+        REQUIRE(*it == i--);
+    }
+
+    REQUIRE(it == list.begin());
+    REQUIRE(i == 0);
+    REQUIRE(*it == i);
+
+    auto anotherIt = list.begin();
+    REQUIRE(anotherIt == it);
+
+    auto it1 = list.begin(), it2 = list.begin();
+    auto old = it1++;
+    REQUIRE(*old == 0);
+    it1++;
+    it2++;
+    it2++;
+
+    REQUIRE(it1 == it2);
+    REQUIRE(*it1 == 2);
+
+    it1--;
+    it1--;
+    REQUIRE(it1 == old);
+
+    *old = 6969;
+    REQUIRE(*list.begin() == 6969);
+}
