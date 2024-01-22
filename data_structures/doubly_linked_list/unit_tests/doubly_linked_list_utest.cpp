@@ -137,3 +137,124 @@ TEST_CASE("Push a lot of elements test iterators")
     *old = 6969;
     REQUIRE(*list.begin() == 6969);
 }
+
+TEST_CASE("Test inserting one element in the brginning")
+{
+    DoublyLinkedList<int> list;
+    list.push_front(1);
+
+    auto it = list.begin();
+    auto insertIt = list.insert(it, 2);
+
+    REQUIRE(*it == 1);
+    REQUIRE(*insertIt == 2);
+
+    REQUIRE(it == list.end());
+    REQUIRE(insertIt == list.begin());
+}
+
+TEST_CASE("Test insertion many elements")
+{
+    DoublyLinkedList<int> list;
+
+    // add even numbers
+    for (int i = 2; i <= 100; i += 2)
+    {
+        list.push_back(i);
+    }
+
+    REQUIRE(list.size() == 50);
+
+    // now add the
+    auto it = list.begin();
+    ++it;
+
+    for (int i = 3; i <= 100; i += 2)
+    {
+        list.insert(it, i);
+        ++it;
+    }
+
+    it = list.begin();
+    for (int i = 2; i <= 100; i++)
+    {
+        REQUIRE(*it == i);
+        ++it;
+    }
+}
+
+TEST_CASE("Erase at beginning")
+{
+    DoublyLinkedList<int> list;
+    list.push_back(5);
+    list.push_back(6);
+    list.push_back(7);
+    list.erase(list.begin());
+
+    auto it = list.begin();
+    REQUIRE(*it == 6);
+    ++it;
+    REQUIRE(*it == 7);
+    REQUIRE(it == list.end());
+}
+
+TEST_CASE("Erase at end")
+{
+    DoublyLinkedList<int> list;
+    list.push_back(5);
+    list.push_back(6);
+    list.push_back(7);
+
+    list.erase(list.end());
+
+    auto it = list.end();
+    REQUIRE(*it == 6);
+    --it;
+    REQUIRE(*it == 5);
+}
+
+TEST_CASE("Erase at middle")
+{
+    DoublyLinkedList<int> list;
+    list.push_back(5);
+    list.push_back(6);
+    list.push_back(7);
+    auto it = list.begin();
+    ++it;
+    auto afterErasedIt = list.erase(it);
+    REQUIRE(!it);
+    REQUIRE(*afterErasedIt == 7);
+    afterErasedIt--;
+    REQUIRE(*afterErasedIt == 5);
+    REQUIRE(list.size() == 2);
+}
+
+TEST_CASE("Erase many numbers")
+{
+    DoublyLinkedList<int> list;
+    for (int i = 1; i <= 100; i++)
+    {
+        list.push_back(i);
+    }
+
+    REQUIRE(list.size() == 100);
+
+    auto it = list.begin();
+    ++it;
+
+    for (int i = 3; i <= 100; i +=2)
+    {
+        it = list.erase(it);
+        REQUIRE(*it == i);
+        ++it;
+    }
+
+    it = list.begin();
+    for (int i = 1; i <= 100; i += 2)
+    {
+        REQUIRE(*it == i);
+        ++it;
+    }
+
+    REQUIRE(list.size() == 51);
+}
