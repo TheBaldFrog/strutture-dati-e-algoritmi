@@ -104,18 +104,13 @@ TEST_CASE("Push a lot of elements test iterators")
         REQUIRE(*it == i++);
     }
 
-    REQUIRE(it == list.end());
-    REQUIRE(i == 29'999);
-    REQUIRE(*it == i);
-
-    for (; it != list.begin(); --it)
+    i = 0;
+    for (const auto& elem : list)
     {
-        REQUIRE(*it == i--);
+        REQUIRE(elem == i++);
     }
 
-    REQUIRE(it == list.begin());
-    REQUIRE(i == 0);
-    REQUIRE(*it == i);
+    it = list.begin();
 
     auto anotherIt = list.begin();
     REQUIRE(anotherIt == it);
@@ -144,12 +139,11 @@ TEST_CASE("Test inserting one element in the brginning")
     list.push_front(1);
 
     auto it = list.begin();
-    auto insertIt = list.insert(it, 2);
+    auto insertIt = list.insertBefore(it, 2);
 
     REQUIRE(*it == 1);
     REQUIRE(*insertIt == 2);
 
-    REQUIRE(it == list.end());
     REQUIRE(insertIt == list.begin());
 }
 
@@ -171,7 +165,7 @@ TEST_CASE("Test insertion many elements")
 
     for (int i = 3; i <= 100; i += 2)
     {
-        list.insert(it, i);
+        list.insertBefore(it, i);
         ++it;
     }
 
@@ -195,22 +189,6 @@ TEST_CASE("Erase at beginning")
     REQUIRE(*it == 6);
     ++it;
     REQUIRE(*it == 7);
-    REQUIRE(it == list.end());
-}
-
-TEST_CASE("Erase at end")
-{
-    DoublyLinkedList<int> list;
-    list.push_back(5);
-    list.push_back(6);
-    list.push_back(7);
-
-    list.erase(list.end());
-
-    auto it = list.end();
-    REQUIRE(*it == 6);
-    --it;
-    REQUIRE(*it == 5);
 }
 
 TEST_CASE("Erase at middle")
@@ -222,7 +200,6 @@ TEST_CASE("Erase at middle")
     auto it = list.begin();
     ++it;
     auto afterErasedIt = list.erase(it);
-    REQUIRE(!it);
     REQUIRE(*afterErasedIt == 7);
     afterErasedIt--;
     REQUIRE(*afterErasedIt == 5);

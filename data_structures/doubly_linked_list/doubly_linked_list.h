@@ -52,7 +52,7 @@ public:
      * Insert value before pos.
      * @return Iterator pointing to the inserted value
      */
-    DoublyLinkedListIterator<T> insert(DoublyLinkedListIterator<T> pos, const T &value);
+    DoublyLinkedListIterator<T> insertBefore(DoublyLinkedListIterator<T> pos, const T &value);
 
     /**
      * Removes the elemnt at pos
@@ -83,60 +83,68 @@ private:
 template <typename T>
 class DoublyLinkedListIterator
 {
+    using I = DoublyLinkedListIterator<T>;
+
 public:
     explicit DoublyLinkedListIterator(Node<T> *pCurrentNode = nullptr)
         : m_pCurrentNode{pCurrentNode} {}
 
-    DoublyLinkedListIterator &operator++()
+    I next()
     {
-        if (m_pCurrentNode->next)
+        if (!isValid())
+            return *this;
+
+        return I{m_pCurrentNode->next};
+    }
+
+    I prev() const
+    {
+        if (!isValid())
         {
-            m_pCurrentNode = m_pCurrentNode->next;
+            return *this;
         }
 
-        return *this;
+        return I{m_pCurrentNode->previous};
+    }
+
+    DoublyLinkedListIterator &operator++()
+    {
+        return *this = next();
     }
 
     DoublyLinkedListIterator operator++(int)
     {
-        DoublyLinkedListIterator old = *this;
+        I old = *this;
         ++*this;
         return old;
     }
 
     DoublyLinkedListIterator &operator--()
     {
-        if (m_pCurrentNode->previous)
-        {
-            m_pCurrentNode = m_pCurrentNode->previous;
-        }
-
-        return *this;
+        return *this = prev();
     }
 
     DoublyLinkedListIterator operator--(int)
     {
-        DoublyLinkedListIterator old = *this;
+        I old = *this;
         --*this;
         return old;
     }
 
-    bool isValid() const { return m_pCurrentNode; }
+    bool isValid() const { return m_pCurrentNode != nullptr; }
 
-    bool operator!() const { return isValid(); }
+    operator bool() const { return isValid(); }
 
-    T &operator*() { return m_pCurrentNode->data; }
+    T &get() { return m_pCurrentNode->data; }
 
-    T *operator->() { return &m_pCurrentNode->data; }
+    T &operator*() { return get(); }
 
-    friend bool operator==(const DoublyLinkedListIterator<T> &lhs,
-                           const DoublyLinkedListIterator<T> &rhs)
+    friend bool operator==(const I &lhs, const I &rhs)
     {
         return lhs.m_pCurrentNode == rhs.m_pCurrentNode;
     }
 
-    friend bool operator!=(const DoublyLinkedListIterator<T> &lhs,
-                           const DoublyLinkedListIterator<T> &rhs)
+    friend bool operator!=(const I &lhs, const I &rhs)
     {
         return !(lhs == rhs);
     }
@@ -145,6 +153,29 @@ private:
     Node<T> *m_pCurrentNode;
     friend class DoublyLinkedList<T>;
 };
+
+template <typename T>
+inline DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList &other)
+{
+    for (const auto &elem : other)
+    {
+        push_back(elem);
+    }
+}
+
+template <typename T>
+inline DoublyLinkedList<T> &DoublyLinkedList<T>::operator=(const DoublyLinkedList &other)
+{
+    if (this != &other)
+    {
+        for (const auto &elem : other)
+        {
+            push_back(elem);
+        }
+    }
+
+    return *this;
+}
 
 template <typename T>
 inline DoublyLinkedList<T>::~DoublyLinkedList() { clear(); }
@@ -239,11 +270,11 @@ inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::begin() noexcept
 template <typename T>
 inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::end() noexcept
 {
-    return DoublyLinkedListIterator<T>(tail);
+    return DoublyLinkedListIterator<T>(nullptr);
 }
 
 template <typename T>
-inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::insert(DoublyLinkedListIterator<T> pos, const T &value)
+inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::insertBefore(DoublyLinkedListIterator<T> pos, const T &value)
 {
     if (pos == begin())
     {
@@ -269,12 +300,6 @@ inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::erase(DoublyLinkedListIt
     {
         pop_front();
         return begin();
-    }
-
-    if (pos == end())
-    {
-        pop_back();
-        return end();
     }
 
     --currentSize;
