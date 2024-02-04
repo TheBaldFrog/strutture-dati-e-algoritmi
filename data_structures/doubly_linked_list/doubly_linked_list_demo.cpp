@@ -5,13 +5,13 @@ template <typename T>
 void print(DoublyLinkedList<T> &list)
 {
     DoublyLinkedListIterator<T> it = list.begin();
-    for (; it != list.end(); ++it)
+    for (const auto &elem : list)
     {
-        std::cout << *it << ' ';
+        std::cout << elem << ' ';
     }
 
     // it points to the last element now
-    std::cout << *it << std::endl;
+    std::cout << std::endl;
 }
 
 int main()
@@ -26,12 +26,10 @@ int main()
 
     int sum = 0;
     DoublyLinkedListIterator<int> it = list.begin();
-    for (; it != list.end(); ++it)
+    for (const auto &elem : list)
     {
-        sum += *it;
+        sum += elem;
     }
-
-    sum += *it;
 
     std::cout << "Sum of elements: " << sum << std::endl;
 
