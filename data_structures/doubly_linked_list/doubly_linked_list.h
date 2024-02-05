@@ -13,8 +13,14 @@ struct Node
         : data{d}, previous{p}, next{n} {}
 };
 
+template <typename T, typename ReferenceType, typename NodeType>
+class DLLIterator;
+
 template <typename T>
-class DoublyLinkedListIterator;
+using DoublyLinkedListIterator = DLLIterator<T, T &, Node<T>>;
+
+template <typename T>
+using DoublyLinkedListCIterator = DLLIterator<T, const T &, const Node<T>>;
 
 template <typename T>
 class DoublyLinkedList
@@ -22,8 +28,8 @@ class DoublyLinkedList
 public:
     DoublyLinkedList() = default;
     // TODO when const_iterator is implemented
-    DoublyLinkedList(const DoublyLinkedList &other);
-    DoublyLinkedList &operator=(const DoublyLinkedList &other);
+    DoublyLinkedList(const DoublyLinkedList &other);            // O(n)
+    DoublyLinkedList &operator=(const DoublyLinkedList &other); // O(n)
     ~DoublyLinkedList();
 
     /**
@@ -46,21 +52,28 @@ public:
      * return interator to the first element
      */
     DoublyLinkedListIterator<T> begin() noexcept;
+    DoublyLinkedListCIterator<T> begin() const noexcept;
+    DoublyLinkedListCIterator<T> cbegin() const noexcept;
+
     DoublyLinkedListIterator<T> end() noexcept;
+    DoublyLinkedListCIterator<T> end() const noexcept;
+    DoublyLinkedListCIterator<T> cend() const noexcept;
 
     /**
      * Insert value before pos.
      * @return Iterator pointing to the inserted value
      */
     DoublyLinkedListIterator<T> insertBefore(DoublyLinkedListIterator<T> pos, const T &value);
+    DoublyLinkedListCIterator<T> insertBefore(DoublyLinkedListCIterator<T> pos, const T &value);
 
     /**
-     * Removes the elemnt at pos
+     * Removes the element at pos
      * @return Iterator following the last removed element
      * If pos refers to the last element, then invalid iterator is returned
      * @note the parameter 'pos' becomes invalid iterator after the erasion
      */
     DoublyLinkedListIterator<T> erase(DoublyLinkedListIterator<T> pos);
+    DoublyLinkedListCIterator<T> erase(DoublyLinkedListCIterator<T> pos);
 
     T &front();
     const T &front() const;
@@ -75,18 +88,25 @@ public:
     void clear();
 
 private:
+    template <typename IteratorType>
+    IteratorType erase_help(IteratorType pos);
+
+    template <typename IteratorType>
+    IteratorType insert_before_help(IteratorType pos, const T &value);
+
+private:
     Node<T> *head = nullptr;
     Node<T> *tail = nullptr;
     size_t currentSize = 0;
 };
 
-template <typename T>
-class DoublyLinkedListIterator
+template <typename T, typename ReferenceType, typename NodeType>
+class DLLIterator
 {
-    using I = DoublyLinkedListIterator<T>;
+    using I = DLLIterator<T, ReferenceType, NodeType>;
 
 public:
-    explicit DoublyLinkedListIterator(Node<T> *pCurrentNode = nullptr)
+    explicit DLLIterator(NodeType *pCurrentNode = nullptr)
         : m_pCurrentNode{pCurrentNode} {}
 
     I next()
@@ -107,24 +127,24 @@ public:
         return I{m_pCurrentNode->previous};
     }
 
-    DoublyLinkedListIterator &operator++()
+    I &operator++()
     {
         return *this = next();
     }
 
-    DoublyLinkedListIterator operator++(int)
+    I operator++(int)
     {
         I old = *this;
         ++*this;
         return old;
     }
 
-    DoublyLinkedListIterator &operator--()
+    I &operator--()
     {
         return *this = prev();
     }
 
-    DoublyLinkedListIterator operator--(int)
+    I operator--(int)
     {
         I old = *this;
         --*this;
@@ -135,9 +155,9 @@ public:
 
     operator bool() const { return isValid(); }
 
-    T &get() { return m_pCurrentNode->data; }
+    ReferenceType &get() const { return m_pCurrentNode->data; }
 
-    T &operator*() { return get(); }
+    ReferenceType &operator*() const { return get(); }
 
     friend bool operator==(const I &lhs, const I &rhs)
     {
@@ -150,14 +170,14 @@ public:
     }
 
 private:
-    Node<T> *m_pCurrentNode;
+    NodeType *m_pCurrentNode;
     friend class DoublyLinkedList<T>;
 };
 
 template <typename T>
 inline DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList &other)
 {
-    for (const auto &elem : other)
+    for (const T &elem : other)
     {
         push_back(elem);
     }
@@ -168,7 +188,7 @@ inline DoublyLinkedList<T> &DoublyLinkedList<T>::operator=(const DoublyLinkedLis
 {
     if (this != &other)
     {
-        for (const auto &elem : other)
+        for (const T &elem : other)
         {
             push_back(elem);
         }
@@ -268,9 +288,33 @@ inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::begin() noexcept
 }
 
 template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::begin() const noexcept
+{
+    return DoublyLinkedListCIterator<T>{head};
+}
+
+template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::cbegin() const noexcept
+{
+    return DoublyLinkedListCIterator<T>{head};
+}
+
+template <typename T>
 inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::end() noexcept
 {
     return DoublyLinkedListIterator<T>(nullptr);
+}
+
+template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::end() const noexcept
+{
+    return DoublyLinkedListCIterator<T>(nullptr);
+}
+
+template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::cend() const noexcept
+{
+    return DoublyLinkedListCIterator<T>(nullptr);
 }
 
 template <typename T>
@@ -282,15 +326,19 @@ inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::insertBefore(DoublyLinke
         return begin();
     }
 
-    Node<T> *node = new Node{value};
-    ++currentSize;
+    return insert_before_help(pos, value);
+}
 
-    node->next = pos.m_pCurrentNode;
-    node->previous = pos.m_pCurrentNode->previous;
-    pos.m_pCurrentNode->previous->next = node;
-    pos.m_pCurrentNode->previous = node;
+template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::insertBefore(DoublyLinkedListCIterator<T> pos, const T &value)
+{
+    if (pos == cbegin())
+    {
+        push_front(value);
+        return cbegin();
+    }
 
-    return DoublyLinkedListIterator<T>{node};
+    return insert_before_help(pos, value);
 }
 
 template <typename T>
@@ -302,12 +350,19 @@ inline DoublyLinkedListIterator<T> DoublyLinkedList<T>::erase(DoublyLinkedListIt
         return begin();
     }
 
-    --currentSize;
-    pos.m_pCurrentNode->previous->next = pos.m_pCurrentNode->next;
-    pos.m_pCurrentNode->next->previous = pos.m_pCurrentNode->previous;
-    auto next = DoublyLinkedListIterator<T>{pos.m_pCurrentNode->next};
-    delete pos.m_pCurrentNode;
-    return next;
+    return erase_help(pos);
+}
+
+template <typename T>
+inline DoublyLinkedListCIterator<T> DoublyLinkedList<T>::erase(DoublyLinkedListCIterator<T> pos)
+{
+    if (pos == cbegin())
+    {
+        pop_front();
+        return cbegin();
+    }
+
+    return erase_help(pos);
 }
 
 template <typename T>
@@ -357,8 +412,55 @@ inline void DoublyLinkedList<T>::clear()
 
 template <typename T>
 bool operator==(const DoublyLinkedList<T> &lhs,
-                const DoublyLinkedList<T> &rhs) {}
+                const DoublyLinkedList<T> &rhs)
+{
+    if (lhs.size() != rhs.size())
+    {
+        return false;
+    }
+
+    auto itLhs = lhs.cbegin();
+    auto itRhs = rhs.cbegin();
+
+    for (; itLhs != lhs.cend(); ++itLhs, ++itRhs)
+    {
+        if (*itLhs != *itRhs)
+            return false;
+    }
+
+    return true;
+}
 
 template <typename T>
 bool operator!=(const DoublyLinkedList<T> &lhs,
-                const DoublyLinkedList<T> &rhs) {}
+                const DoublyLinkedList<T> &rhs)
+{
+    return !(lhs == rhs);
+}
+
+template <typename T>
+template <typename IteratorType>
+inline IteratorType DoublyLinkedList<T>::erase_help(IteratorType pos)
+{
+    --currentSize;
+    pos.m_pCurrentNode->previous->next = pos.m_pCurrentNode->next;
+    pos.m_pCurrentNode->next->previous = pos.m_pCurrentNode->previous;
+    auto next = IteratorType{pos.m_pCurrentNode->next};
+    delete pos.m_pCurrentNode;
+    return next;
+}
+
+template <typename T>
+template <typename IteratorType>
+inline IteratorType DoublyLinkedList<T>::insert_before_help(IteratorType pos, const T &value)
+{
+    Node<T> *node = new Node{value};
+    ++currentSize;
+
+    node->next = pos.m_pCurrentNode;
+    node->previous = pos.m_pCurrentNode->previous;
+    pos.m_pCurrentNode->previous->next = node;
+    pos.m_pCurrentNode->previous = node;
+
+    return IteratorType{node};
+}

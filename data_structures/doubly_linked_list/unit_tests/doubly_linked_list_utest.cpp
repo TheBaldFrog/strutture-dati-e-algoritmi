@@ -105,7 +105,7 @@ TEST_CASE("Push a lot of elements test iterators")
     }
 
     i = 0;
-    for (const auto& elem : list)
+    for (const auto &elem : list)
     {
         REQUIRE(elem == i++);
     }
@@ -219,7 +219,7 @@ TEST_CASE("Erase many numbers")
     auto it = list.begin();
     ++it;
 
-    for (int i = 3; i <= 100; i +=2)
+    for (int i = 3; i <= 100; i += 2)
     {
         it = list.erase(it);
         REQUIRE(*it == i);
@@ -234,4 +234,25 @@ TEST_CASE("Erase many numbers")
     }
 
     REQUIRE(list.size() == 51);
+}
+
+TEST_CASE("Comparator of linked list, copy ctor and operato= work correctlu")
+{
+    DoublyLinkedList<int> l1, l2;
+    for (int i = 0; i < 30'000; i++)
+    {
+        l1.push_back(i);
+        l2.push_back(i);
+    }
+
+    REQUIRE(l1 == l2);
+    l1.push_back(69);
+    REQUIRE(l1 != l2);
+
+    auto l3{l1};
+    REQUIRE(l3 == l1);
+
+    DoublyLinkedList<int> l4;
+    l4 = l2;
+    REQUIRE(l4 == l2);
 }
