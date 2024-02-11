@@ -386,7 +386,7 @@ inline T &DoublyLinkedList<T>::back()
 template <typename T>
 inline const T &DoublyLinkedList<T>::back() const
 {
-    return tail->data();
+    return tail->data;
 }
 
 template <typename T>
