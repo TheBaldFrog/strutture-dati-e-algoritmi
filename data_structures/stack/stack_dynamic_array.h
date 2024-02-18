@@ -36,7 +36,7 @@ inline T &StackDynamicArrayImpl<T>::top()
 {
     if (empty())
     {
-        throw std::runtime_error{"Trying to access top element of Eempty stack"};
+        throw std::runtime_error{"Trying to access top element of Empty stack"};
     }
 
     return m_dynArr.back();
@@ -47,7 +47,7 @@ inline const T &StackDynamicArrayImpl<T>::top() const
 {
     if (empty())
     {
-        throw std::runtime_error{"Trying to access top element of Eempty stack"};
+        throw std::runtime_error{"Trying to access top element of Empty stack"};
     }
 
     return m_dynArr.back();
