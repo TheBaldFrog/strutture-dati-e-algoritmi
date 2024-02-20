@@ -1,6 +1,7 @@
 ﻿## Implementazione di varie strutture dati e algoritmi
 
 ### [Catch2](https://github.com/catchorg/Catch2) unit testing framework for C++
+### [vcpkg](https://github.com/microsoft/vcpkg) C++ Library Manager
 
 ### Strutture dati
 - [Dynamic array - non template](data_structures/dynamic_array)
