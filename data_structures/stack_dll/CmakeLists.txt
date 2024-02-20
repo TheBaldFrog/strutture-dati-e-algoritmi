@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.6.0)
-project(stackDLL_data_structure)
+project("stackDLL_data_structure" LANGUAGES CXX)
 
-add_executable(stackDLL_demo stackDLL_demo.cpp stackDLL.h)
-target_include_directories(stackDLL_demo PUBLIC ../stack ../doubly_linked_list)
+add_library(stack_dll INTERFACE)
+target_include_directories(stack_dll INTERFACE . ../stack ../doubly_linked_list)
+
+add_executable(stackDLL_demo stackDLL_demo.cpp)
+target_link_libraries(stackDLL_demo PRIVATE stack_dll)
+
 set_property(TARGET stackDLL_demo PROPERTY CXX_STANDARD 20)
 
 add_subdirectory(unit_tests)

@@ -5,9 +5,10 @@ find_package(Catch2 CONFIG REQUIRED)
 
 add_executable(run_stackDLL_tests main_utest.cpp stackDLL_utest.cpp)
 
-target_link_libraries(run_stackDLL_tests PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
+target_link_libraries(run_stackDLL_tests PRIVATE Catch2::Catch2 Catch2::Catch2WithMain stack_dll)
 
 set_property(TARGET run_stackDLL_tests PROPERTY CXX_STANDARD 20)
 
 target_include_directories(run_stackDLL_tests PUBLIC ${PROJECT_SOURCE_DIR}/..)
-target_include_directories(run_stackDLL_tests PUBLIC ../../stack ../../doubly_linked_list)
+
+# target_include_directories(run_stackDLL_tests PUBLIC ../../stack ../../doubly_linked_list)

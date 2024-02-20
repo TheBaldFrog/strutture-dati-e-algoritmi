@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.6.0)
+project("queue_using_stacks_data_structure" LANGUAGES CXX)
+
+add_executable(queue_using_stacks_demo queue_using_stacks_demo.cpp queue_using_stacks.h)
+target_link_libraries(queue_using_stacks_demo PRIVATE stack_dll)
+
+set_property(TARGET stackDLL_demo PROPERTY CXX_STANDARD 20)
+
+add_subdirectory(unit_tests)

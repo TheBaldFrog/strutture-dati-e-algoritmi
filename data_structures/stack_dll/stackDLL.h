@@ -13,6 +13,8 @@ public:
     virtual size_t size() const override;
     virtual bool empty() const override;
 
+    StackDLL &operator=(const StackDLL &other);
+
 private:
     DoublyLinkedList<T> m_dll;
 };
@@ -61,4 +63,15 @@ template <typename T>
 inline bool StackDLL<T>::empty() const
 {
     return m_dll.empty();
+}
+
+template <typename T>
+inline StackDLL<T> &StackDLL<T>::operator=(const StackDLL &other)
+{
+    if (this != &other)
+    {
+        m_dll = other.m_dll;
+    }
+
+    return *this;
 }
