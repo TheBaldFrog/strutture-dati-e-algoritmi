@@ -4,18 +4,19 @@
 
 ### Strutture dati
 - [Dynamic array - non template](data_structures/dynamic_array)
-
 - [Dynamic array - template](data_structures/dynamic_array_template)
-
 - [Doubly linked list](data_structures/doubly_linked_list)
-
 - [Stack](data_structures/stack)
-
 - [Stack Doubly Linked List](data_structures/stack_dll)
-
 - [Queue using two stacks](data_structures/queue_using_stacks)
 
 ### Algoritmi
-- [Sorting and searching algorithms](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/tree/58c7e44f482dcb660f4737900d11f036c7332274/sorting_algorithms)
+- [Bubble Sort](sorting_algorithms/bubble_sort.cpp)
+- [Insertion Sort](sorting_algorithms/insertion_sort.cpp)
+- [Selection Sort](sorting_algorithms/selection_sort.cpp)
+- [Merge Sort](sorting_algorithms/merge_sort.cpp)
+- [Quick Sort](sorting_algorithms/quick_sort.cpp)
+- [Binary Search](sorting_algorithms/binary_search.cpp)
 
 ### Other
+- [Locality of reference](sorting_algorithms/locality_of_reference.cpp)
