@@ -1,3 +1,5 @@
+#pragma once
+
 #include "stackDLL.h"
 #include <stdexcept>
 

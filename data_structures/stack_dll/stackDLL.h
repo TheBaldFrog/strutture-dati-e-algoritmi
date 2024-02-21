@@ -1,3 +1,5 @@
+#pragma once
+
 #include "istack.h"
 #include <stdexcept>
 #include "doubly_linked_list.h"
