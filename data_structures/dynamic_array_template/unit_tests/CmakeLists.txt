@@ -3,11 +3,8 @@ project(dynamic_array_data_structure_template_unit_tests)
 
 find_package(Catch2 CONFIG REQUIRED)
 
-add_executable(run_dyn_array_template_tests main_utest.cpp dynamic_array_utest.cpp
-    ../dynamic_array.h)
+add_executable(run_dyn_array_template_tests main_utest.cpp dynamic_array_utest.cpp)
 
-target_link_libraries(run_dyn_array_template_tests PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
+target_link_libraries(run_dyn_array_template_tests PRIVATE Catch2::Catch2 Catch2::Catch2WithMain dynamic_arr)
 
 set_property(TARGET run_dyn_array_template_tests PROPERTY CXX_STANDARD 20)
-
-target_include_directories(run_dyn_array_template_tests PUBLIC ${PROJECT_SOURCE_DIR}/..)
