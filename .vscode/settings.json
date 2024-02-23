@@ -40,6 +40,7 @@
         "xmemory": "cpp"
     },
     "cSpell.words": [
+        "inorder",
         "vcpkg"
     ]
 }
