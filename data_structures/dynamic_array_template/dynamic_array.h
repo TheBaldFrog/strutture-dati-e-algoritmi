@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <vector>
 
 template <typename T>
 class DynamicArray
@@ -9,6 +10,7 @@ public:
     DynamicArray() = default;
     DynamicArray(size_t initialSize);
     DynamicArray(const DynamicArray &other);
+    DynamicArray(const std::vector<T> &other);
     DynamicArray &operator=(const DynamicArray &);
     ~DynamicArray();
 
@@ -106,6 +108,15 @@ DynamicArray<T>::DynamicArray(const DynamicArray &other)
 
     m_currentSize = other.m_currentSize;
     m_currentCapacity = other.m_currentCapacity;
+}
+
+template <typename T>
+inline DynamicArray<T>::DynamicArray(const std::vector<T> &other)
+{
+    for (int i = 0; i < other.size(); i++)
+    {
+        push_back(other[i]);
+    }
 }
 
 template <typename T>
