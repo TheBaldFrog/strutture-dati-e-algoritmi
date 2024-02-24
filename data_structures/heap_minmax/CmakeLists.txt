@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.6.0)
+project("heap_minmax_data_structure" LANGUAGES CXX)
+
+add_executable(heap_minmax_demo heap_minmax_demo.cpp heap_minmax.h)
+target_link_libraries(heap_minmax_demo PRIVATE dynamic_arr)
+
+set_property(TARGET heap_minmax_demo PROPERTY CXX_STANDARD 20)
+
+add_subdirectory(unit_tests)

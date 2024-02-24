@@ -37,9 +37,11 @@
         "variant": "cpp",
         "xlocale": "cpp",
         "xlocinfo": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "stack": "cpp"
     },
     "cSpell.words": [
+        "Heapify",
         "inorder",
         "vcpkg"
     ]

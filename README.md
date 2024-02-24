@@ -10,6 +10,7 @@
 - [Stack](data_structures/stack)
 - [Stack Doubly Linked List](data_structures/stack_dll)
 - [Queue using two stacks](data_structures/queue_using_stacks)
+- [MinMax Heap](data_structures/heap_minmax)
 
 ### Algoritmi
 - [Bubble Sort](sorting_algorithms/bubble_sort.cpp)
@@ -18,6 +19,7 @@
 - [Merge Sort](sorting_algorithms/merge_sort.cpp)
 - [Quick Sort](sorting_algorithms/quick_sort.cpp)
 - [Binary Search](sorting_algorithms/binary_search.cpp)
+- [Heap Sort](data_structures/heap_minmax/heap_minmax.h)
 
 ### Other
 - [Locality of reference](sorting_algorithms/locality_of_reference.cpp)
