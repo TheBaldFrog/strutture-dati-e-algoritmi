@@ -116,23 +116,24 @@ public:
      * O(n log(n))
      * Space O(1)
      */
-    static void heapSort(Heap &heap, const bool reversed = false)
+    void heapSort(const bool reversed = false)
     {
-        heap.isMin = !reversed;
+        if (reversed)
+            isMin = !isMin;
 
-        for (int i = (int)heap.data.size() / 2 - 1; i >= 0; i--)
-            heap.siftDown(i);
+        for (int i = (int)data.size() / 2 - 1; i >= 0; i--)
+            siftDown(i);
 
-        for (int i = (int)heap.data.size() - 1; i > 0; --i)
+        for (int i = (int)data.size() - 1; i > 0; --i)
         {
-            std::swap(heap.data[0], heap.data[i]);
-            heap.siftDown(i, 0);
+            std::swap(data[0], data[i]);
+            siftDown(i, 0);
         }
 
         // reverse array
-        for (int i = 0; i < heap.data.size() / 2; i++)
+        for (int i = 0; i < data.size() / 2; i++)
         {
-            std::swap(heap.data[i], heap.data[heap.data.size() - 1 - i]);
+            std::swap(data[i], data[data.size() - 1 - i]);
         }
     }
 

@@ -132,7 +132,7 @@ TEST_CASE("Heap-max decreaseKey")
     REQUIRE(heap.top() == 6); // The top element should now be 6 after decreasing the key
 }
 
-TEST_CASE("Heap sort")
+TEST_CASE("Heap-min sort")
 {
     Heap<int> heap;
     heap.push(95);
@@ -149,7 +149,7 @@ TEST_CASE("Heap sort")
     heap.push(23);
     heap.push(99);
 
-    Heap<int>::heapSort(heap);
+    heap.heapSort();
     auto copy = heap.getCopy();
 
     for (int i = 0; i < copy.size() - 1; i++)
@@ -157,12 +157,46 @@ TEST_CASE("Heap sort")
         REQUIRE(copy[i] <= copy[i + 1]);
     }
 
-    Heap<int>::heapSort(heap, true);
+    heap.heapSort(true);
     copy = heap.getCopy();
 
     for (int i = 0; i < copy.size() - 1; i++)
     {
         REQUIRE(copy[i] >= copy[i + 1]);
+    }
+}
+
+TEST_CASE("Heap-max sort")
+{
+    Heap<int> heap(false);
+    heap.push(95);
+    heap.push(37);
+    heap.push(-4);
+    heap.push(60);
+    heap.push(1);
+    heap.push(2);
+    heap.push(57);
+    heap.push(18);
+    heap.push(2);
+    heap.push(-9);
+    heap.push(28);
+    heap.push(23);
+    heap.push(99);
+
+    heap.heapSort();
+    auto copy = heap.getCopy();
+
+    for (int i = 0; i < copy.size() - 1; i++)
+    {
+        REQUIRE(copy[i] >= copy[i + 1]);
+    }
+
+    heap.heapSort(true);
+    copy = heap.getCopy();
+
+    for (int i = 0; i < copy.size() - 1; i++)
+    {
+        REQUIRE(copy[i] <= copy[i + 1]);
     }
 }
 

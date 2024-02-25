@@ -33,10 +33,10 @@ int main()
     h.push(55);
     h.push(34);
 
-    Heap<int>::heapSort(h);
+    h.heapSort();
     std::cout << h << '\n';
 
-    Heap<int>::heapSort(h, true);
+    h.heapSort(true);
     std::cout << h << '\n';
 
     DynamicArray<int> arr;
@@ -90,6 +90,24 @@ int main()
     std::cout << h.empty() << '\n';
 
     std::cout << h << '\n';
-    Heap<int>::heapSort(h);
-    std::cout << h;
+    h.heapSort();
+    std::cout << h << "\n\n";
+
+    Heap<int> hea(false);
+    hea.push(5);
+    hea.push(4);
+    hea.push(3);
+    hea.push(8);
+    hea.push(2);
+    hea.push(10);
+    hea.push(2);
+    hea.push(-2);
+    hea.push(1);
+    hea.push(55);
+    hea.push(34);
+
+    hea.heapSort();
+    std::cout << hea << '\n';
+    hea.heapSort(true);
+    std::cout << hea << '\n';
 }
