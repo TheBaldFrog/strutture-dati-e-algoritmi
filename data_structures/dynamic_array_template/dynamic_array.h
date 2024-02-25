@@ -88,10 +88,10 @@ DynamicArray<T>::DynamicArray(size_t initialSize)
     m_arr = new T[initialSize];
 
     // initialize array with 0
-    for (size_t i = 0; i < initialSize; i++)
-    {
-        m_arr[i] = 0;
-    }
+    // for (size_t i = 0; i < initialSize; i++)
+    // {
+    //     m_arr[i] = 0;
+    // }
 
     m_currentSize = initialSize;
     m_currentCapacity = initialSize;
@@ -112,10 +112,11 @@ DynamicArray<T>::DynamicArray(const DynamicArray &other)
 
 template <typename T>
 inline DynamicArray<T>::DynamicArray(const std::vector<T> &other)
+    : DynamicArray(other.size())
 {
     for (int i = 0; i < other.size(); i++)
     {
-        push_back(other[i]);
+        m_arr[i] = other[i];
     }
 }
 
