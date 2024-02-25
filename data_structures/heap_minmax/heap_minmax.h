@@ -14,14 +14,14 @@ public:
         : data(arr), isMin(isMin)
     {
         // Heapify
-        for (int i = (int)data.size(); i >= 0; i--)
+        for (int i = (int)data.size() / 2 - 1; i >= 0; i--)
             siftDown(i);
     }
     Heap(const std::vector<T> &arr, const bool isMin = true)
         : data(arr), isMin(isMin)
     {
         // Heapify
-        for (int i = (int)data.size(); i >= 0; i--)
+        for (int i = (int)data.size() / 2 - 1; i >= 0; i--)
             siftDown(i);
     }
 
@@ -91,14 +91,28 @@ public:
         }
     }
 
+    /**
+     * Heap sort in-place
+     * O(n log(n))
+     * Space O(1)
+     */
     static void heapSort(Heap &heap, const bool reversed = false)
     {
-        Heap<T> resultHeap(heap.data, !reversed);
+        heap.isMin = !reversed;
 
-        for (int i = 0; i < heap.data.size(); i++)
+        for (int i = (int)heap.data.size() / 2 - 1; i >= 0; i--)
+            heap.siftDown(i);
+
+        for (int i = (int)heap.data.size() - 1; i > 0; --i)
         {
-            heap.data[i] = resultHeap.top();
-            resultHeap.pop();
+            std::swap(heap.data[0], heap.data[i]);
+            heap.siftDown(i, 0);
+        }
+
+        // reverse array
+        for (int i = 0; i < heap.data.size() / 2; i++)
+        {
+            std::swap(heap.data[i], heap.data[heap.data.size() - 1 - i]);
         }
     }
 
@@ -148,6 +162,25 @@ private:
         {
             std::swap(data[index], data[smallest]);
             siftDown(smallest);
+        }
+    }
+
+    void siftDown(int size, int index)
+    {
+        int smallest = index;
+        int leftChild = left(index);
+        int rightChild = right(index);
+
+        if (leftChild < size && greater(data[leftChild], data[smallest]))
+            smallest = leftChild;
+
+        if (rightChild < size && greater(data[rightChild], data[smallest]))
+            smallest = rightChild;
+
+        if (smallest != index)
+        {
+            std::swap(data[index], data[smallest]);
+            siftDown(size, smallest);
         }
     }
 };

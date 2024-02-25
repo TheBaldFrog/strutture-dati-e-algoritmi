@@ -28,6 +28,10 @@ int main()
     h.push(2);
     h.push(10);
     h.push(2);
+    h.push(-2);
+    h.push(1);
+    h.push(55);
+    h.push(34);
 
     Heap<int>::heapSort(h);
     printDynamicArr(h.getCopy());
