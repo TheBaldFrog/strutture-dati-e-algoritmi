@@ -19,7 +19,7 @@
 - [Merge Sort](sorting_algorithms/merge_sort.cpp)
 - [Quick Sort](sorting_algorithms/quick_sort.cpp)
 - [Binary Search](sorting_algorithms/binary_search.cpp)
-- [Heap Sort](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/blob/main/data_structures/heap_minmax/heap_minmax.h?plain=1#L99)
+- [Heap Sort](https://github.com/TheBaldFrog/strutture-dati-e-algoritmi/blob/main/data_structures/heap_minmax/heap_minmax.h?plain=1#L119)
 
 ### Other
 - [Locality of reference](sorting_algorithms/locality_of_reference.cpp)
