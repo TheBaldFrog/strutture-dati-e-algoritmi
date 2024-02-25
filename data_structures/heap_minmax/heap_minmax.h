@@ -157,6 +157,23 @@ public:
         return data.empty();
     }
 
+    void printRow(std::ostream &os) const
+    {
+        os << '{';
+        if (empty())
+            os << "Heap is empty";
+        else
+            for (int i = 0; i < data.size(); i++)
+                os << data[i] << (i != data.size() - 1 ? ", " : "");
+        os << '}';
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Heap &obj)
+    {
+        obj.printRow(os);
+        return os;
+    }
+
 private:
     bool isMin;
     DynamicArray<T> data;

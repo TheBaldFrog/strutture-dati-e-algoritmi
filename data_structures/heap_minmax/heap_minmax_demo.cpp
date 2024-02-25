@@ -34,10 +34,10 @@ int main()
     h.push(34);
 
     Heap<int>::heapSort(h);
-    printDynamicArr(h.getCopy());
+    std::cout << h << '\n';
 
     Heap<int>::heapSort(h, true);
-    printDynamicArr(h.getCopy());
+    std::cout << h << '\n';
 
     DynamicArray<int> arr;
     arr.push_back(5);
@@ -80,7 +80,7 @@ int main()
     auto ir = h.get(ind);
     std::cout << ir << '\n';
     h.decreaseKey(ind, 2);
-    printDynamicArr(h.getCopy());
+    std::cout << h;
 
     std::cout << "\n\n";
     int ft = h.find(32);
@@ -88,4 +88,8 @@ int main()
     h.deleteElement(ft);
     std::cout << h.find(32) << '\n';
     std::cout << h.empty() << '\n';
+
+    std::cout << h << '\n';
+    Heap<int>::heapSort(h);
+    std::cout << h;
 }
