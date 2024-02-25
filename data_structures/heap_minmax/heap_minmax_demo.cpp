@@ -110,4 +110,9 @@ int main()
     std::cout << hea << '\n';
     hea.heapSort(true);
     std::cout << hea << '\n';
+
+    hea.deleteElementByValue(-2);
+    hea.deleteElementByValue(2);
+    hea.heapSort();
+    std::cout << hea << '\n';
 }

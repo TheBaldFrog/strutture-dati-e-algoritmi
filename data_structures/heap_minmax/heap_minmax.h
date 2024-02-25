@@ -153,6 +153,12 @@ public:
         siftDown(index);
     }
 
+    void deleteElementByValue(const T &val)
+    {
+        int index = find(val);
+        deleteElement(index);
+    }
+
     bool empty() const
     {
         return data.empty();
