@@ -24,7 +24,7 @@ void heapify(std::vector<int> &arr, int n, int i)
 // In-place heap sort
 void heapSort(std::vector<int> &arr)
 {
-    int n = arr.size();
+    int n = (int)arr.size();
 
     // Build a min-heap
     for (int i = n / 2 - 1; i >= 0; --i)

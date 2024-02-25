@@ -69,6 +69,26 @@ public:
         }
     }
 
+    int find(const T &target, const int index = 0) const
+    {
+        if (index >= data.size())
+            return -1;
+
+        if (target == data.at(index))
+            return index;
+
+        int leftResult = find(target, left(index));
+        if (leftResult != -1)
+            return leftResult;
+
+        return find(target, right(index));
+    }
+
+    const T &get(const int index) const
+    {
+        return data.at(index);
+    }
+
     static void heapSort(DynamicArray<T> &arr, const bool reversed = false)
     {
         Heap<T> heap(arr, !reversed);

@@ -229,3 +229,46 @@ TEST_CASE("Heap sort std::vector")
         REQUIRE(arr[i] >= arr[i + 1]);
     }
 }
+
+TEST_CASE("Heap-min find() and get()")
+{
+    Heap<int> heap;
+
+    for (int i = 0; i < 500; i++)
+    {
+        heap.push(i);
+    }
+
+    for (int i = 500 / 2; i >= 0; i--)
+    {
+
+        REQUIRE(heap.find(i) == i);
+        REQUIRE(heap.get(i) == i);
+    }
+
+    for (int i = 500 / 2; i < 500; i++)
+    {
+        REQUIRE(heap.find(i) == i);
+        REQUIRE(heap.get(i) == i);
+    }
+}
+
+TEST_CASE("Heap-max find() and get()")
+{
+    Heap<int> heap(false);
+
+    for (int i = 0; i < 500; i++)
+    {
+        heap.push(i);
+    }
+
+    for (int i = 0; i < 500; i++)
+    {
+        int t = heap.find(i);
+        REQUIRE(i == heap.get(t));
+    }
+    heap.push(502);
+    heap.decreaseKey(0, 1);
+    REQUIRE(heap.get(0) == 501);
+    REQUIRE(heap.find(501) == 0);
+}

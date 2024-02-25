@@ -73,4 +73,12 @@ int main()
     {
         std::cout << i << ' ';
     }
+
+    std::cout << "\n\n";
+    int ind = h.find(34);
+    std::cout << ind << '\n';
+    auto ir = h.get(ind);
+    std::cout << ir << '\n';
+    h.decreaseKey(ind, 2);
+    printDynamicArr(h.getCopy());
 }
