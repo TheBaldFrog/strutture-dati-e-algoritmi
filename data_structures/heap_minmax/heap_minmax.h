@@ -136,6 +136,27 @@ public:
         }
     }
 
+    void deleteElement(const int index)
+    {
+        if (index >= data.size())
+            throw std::underflow_error{"Cannot delete specified element from the heap because it does not exist."};
+
+        if (index == data.size() - 1)
+        {
+            data.pop_back();
+            return;
+        }
+
+        std::swap(data[index], data[data.size() - 1]);
+        data.pop_back();
+        siftDown(index);
+    }
+
+    bool empty() const
+    {
+        return data.empty();
+    }
+
 private:
     bool isMin;
     DynamicArray<T> data;

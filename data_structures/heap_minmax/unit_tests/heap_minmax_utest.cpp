@@ -272,3 +272,41 @@ TEST_CASE("Heap-max find() and get()")
     REQUIRE(heap.get(0) == 501);
     REQUIRE(heap.find(501) == 0);
 }
+
+TEST_CASE("Heap-min deleteElement()")
+{
+    Heap<int> heap;
+
+    for (int i = 0; i < 500; i++)
+    {
+        heap.push(i);
+    }
+
+    for (int i = 0; i < 500; i++)
+    {
+        int t = heap.find(i);
+        REQUIRE_NOTHROW(heap.deleteElement(t));
+        REQUIRE(heap.find(i) == -1);
+    }
+
+    REQUIRE(heap.empty());
+}
+
+TEST_CASE("Heap-max deleteElement()")
+{
+    Heap<int> heap(false);
+
+    for (int i = 0; i < 500; i++)
+    {
+        heap.push(i);
+    }
+
+    for (int i = 0; i < 500; i++)
+    {
+        int t = heap.find(i);
+        REQUIRE_NOTHROW(heap.deleteElement(t));
+        REQUIRE(heap.find(i) == -1);
+    }
+
+    REQUIRE(heap.empty());
+}

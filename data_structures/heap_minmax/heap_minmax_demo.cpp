@@ -81,4 +81,11 @@ int main()
     std::cout << ir << '\n';
     h.decreaseKey(ind, 2);
     printDynamicArr(h.getCopy());
+
+    std::cout << "\n\n";
+    int ft = h.find(32);
+    std::cout << ft << '\n';
+    h.deleteElement(ft);
+    std::cout << h.find(32) << '\n';
+    std::cout << h.empty() << '\n';
 }
