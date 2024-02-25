@@ -26,7 +26,7 @@ public:
     }
 
     DynamicArray<T> getCopy() { return data; }
-    // const DynamicArray<T> &getCopy() const { return data; }
+    const DynamicArray<T> &getCopy() const { return data; }
 
     /**
      * Based on the greater function getMin or getMax
@@ -105,7 +105,6 @@ public:
 private:
     bool isMin;
     DynamicArray<T> data;
-    int length;
 
     static int left(const int index) { return 2 * index + 1; }
     static int right(const int index) { return 2 * index + 2; }
