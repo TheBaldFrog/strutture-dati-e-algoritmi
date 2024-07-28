@@ -1,7 +1,7 @@
 ﻿## La mia implementazione della Standard Template Library (STL)
 
-### [Catch2](https://github.com/catchorg/Catch2) unit testing framework for C++
-### [vcpkg](https://github.com/microsoft/vcpkg) C++ Library Manager
+### [Catch2](https://github.com/catchorg/Catch2) popular unit testing framework for C++
+### [vcpkg](https://github.com/microsoft/vcpkg) C++ dependency manager by microsoft
 
 ### Strutture dati
 - [Dynamic array - non template](data_structures/dynamic_array)
