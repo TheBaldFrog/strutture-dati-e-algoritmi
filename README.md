@@ -1,4 +1,4 @@
-﻿## La mia implementazione di varie strutture dati e algoritmi utilizzando i template
+﻿## La mia implementazione della Standard Template Library (STL)
 
 ### [Catch2](https://github.com/catchorg/Catch2) unit testing framework for C++
 ### [vcpkg](https://github.com/microsoft/vcpkg) C++ Library Manager
