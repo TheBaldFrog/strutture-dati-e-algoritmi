@@ -23,3 +23,16 @@
 
 ### Other
 - [Locality of reference](sorting_algorithms/locality_of_reference.cpp)
+
+## Build
+### Adding vcpkg as a submodule
+1. git submodule add -f https://github.com/microsoft/vcpkg.git
+2. git submodule update --init --recursive 
+
+### Build Windows
+1. cmake -S . -B build -DCMAKE_BUILD_TYPE:STRING=Release
+2. cmake --build build --config Release
+
+### Build Linux
+1. cmake -S . -B build/ -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja
+2. cmake --build build/
